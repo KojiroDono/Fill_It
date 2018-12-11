@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/10 10:03:21 by auguyon           #+#    #+#             */
-/*   Updated: 2018/12/10 18:29:09 by auguyon          ###   ########.fr       */
+/*   Created: 2018/11/09 21:16:19 by auguyon           #+#    #+#             */
+/*   Updated: 2018/11/16 17:00:05 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
+#include "libft.h"
 
-# define BUFF 547
+int		ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	unsigned const char	*sa;
+	unsigned const char	*sb;
 
-# include "Libft/libft.h"
-# include<stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-
-char		**parse_tab(char *tab, int tetra);
-int			check_all(char *str);
-int			print_error(int i);
-
-#endif
+	sa = (unsigned const char*)s1;
+	sb = (unsigned const char*)s2;
+	if (!n)
+		return (0);
+	while ((*sa == *sb) && --n)
+	{
+		sa++;
+		sb++;
+	}
+	return (*sa - *sb);
+}

@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/10 10:03:21 by auguyon           #+#    #+#             */
-/*   Updated: 2018/12/10 18:29:09 by auguyon          ###   ########.fr       */
+/*   Created: 2018/11/08 10:09:30 by auguyon           #+#    #+#             */
+/*   Updated: 2018/11/30 13:35:02 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
+#include "libft.h"
+#include <stdlib.h>
 
-# define BUFF 547
+char	*ft_strdup(const char *str)
+{
+	char	*dest;
 
-# include "Libft/libft.h"
-# include<stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-
-char		**parse_tab(char *tab, int tetra);
-int			check_all(char *str);
-int			print_error(int i);
-
-#endif
+	if (!(dest = ft_memalloc(ft_strlen(str) + 1)))
+		return (NULL);
+	return (ft_strcpy(dest, str));
+}

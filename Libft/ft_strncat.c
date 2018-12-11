@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/10 10:03:21 by auguyon           #+#    #+#             */
-/*   Updated: 2018/12/10 18:29:09 by auguyon          ###   ########.fr       */
+/*   Created: 2018/11/08 11:56:21 by auguyon           #+#    #+#             */
+/*   Updated: 2018/11/08 12:10:06 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
+#include "libft.h"
 
-# define BUFF 547
+char	*ft_strncat(char *dest, const char *src, size_t n)
+{
+	int		i;
 
-# include "Libft/libft.h"
-# include<stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-
-char		**parse_tab(char *tab, int tetra);
-int			check_all(char *str);
-int			print_error(int i);
-
-#endif
+	i = ft_strlen(dest);
+	while (n != 0 && *src)
+	{
+		dest[i++] = *src++;
+		n--;
+	}
+	dest[i] = '\0';
+	return (dest);
+}

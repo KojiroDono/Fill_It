@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/10 10:03:21 by auguyon           #+#    #+#             */
-/*   Updated: 2018/12/10 18:29:09 by auguyon          ###   ########.fr       */
+/*   Created: 2018/11/09 21:48:03 by auguyon           #+#    #+#             */
+/*   Updated: 2018/11/10 14:00:36 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
+#include "libft.h"
 
-# define BUFF 547
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
+{
+	size_t	i;
+	size_t	j;
 
-# include "Libft/libft.h"
-# include<stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-
-char		**parse_tab(char *tab, int tetra);
-int			check_all(char *str);
-int			print_error(int i);
-
-#endif
+	i = 0;
+	j = 0;
+	while (dest[i] && i < size)
+		i++;
+	while (src[j] && (i + j + 1) < size)
+	{
+		dest[i + j] = src[j];
+		j++;
+	}
+	if (i + j < size)
+		dest[i + j] = '\0';
+	return (i + ft_strlen(src));
+}

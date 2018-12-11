@@ -6,11 +6,18 @@
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 13:45:41 by auguyon           #+#    #+#             */
-/*   Updated: 2018/12/10 13:45:42 by auguyon          ###   ########.fr       */
+/*   Updated: 2018/12/11 11:03:52 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+int		print_error(int i)
+{
+	if (i == -1)
+		write(2, "Error\n", 6);
+	return (0);
+}
 
 int     check_error(char *str)
 {
@@ -27,9 +34,9 @@ int     check_error(char *str)
     {
         if (str[i] != '\n' || str[i] != '#' || str[i] != '.')
             return (-1);
-        if (str[i] = '#')
+        if (str[i] == '#')
             d++;
-        if (str[i] = '\n')
+        if (str[i] == '\n')
             n++;
         if (d == 4 && (n == 4 || n == 3) && (str[i] == '\n' || str[i] == '\0'))
         {
@@ -48,12 +55,13 @@ int     check_all(char *str)
 {
     int    o;
     int    len;
-    o = 0;
-    len = ft_strlen(str);
-    while (o < len)
+	
+	o = 0;
+	len = ft_strlen(str);
+	while (o < len)
     {
         if (!check_error(str + o))
-            return (0);
+            return (-1);
         o += 21;
     }
     return (1);

@@ -6,7 +6,7 @@
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 10:08:07 by auguyon           #+#    #+#             */
-/*   Updated: 2018/12/10 19:52:43 by auguyon          ###   ########.fr       */
+/*   Updated: 2018/12/11 11:02:57 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int		main(int ac, char **av)
 	fd = open(av[1], O_RDONLY);
 	read_in_tab(fd, &tab);
 	close(fd);
-//	if (!check_all(tab))
-//		return (0);
+	if ((check_all(tab)) <= 0)
+		return (print_error(-1));
 	new_tab = parse_tab(tab, 9);
 	ft_strclr(tab);
 	return (0);

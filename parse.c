@@ -6,7 +6,7 @@
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 10:02:20 by auguyon           #+#    #+#             */
-/*   Updated: 2018/12/10 19:52:47 by auguyon          ###   ########.fr       */
+/*   Updated: 2018/12/11 10:56:07 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,49 +29,58 @@ char	*del_eol(char *tab)
 		new_tab += 4;
 		i++;
 	}
-	*new_tab = '\0';	
+	new_tab[17] = '\0';	
 	return (tmp);
+}
+
+void	first_hashtag(char **tab)
+{
+	int	d;
+	int	i;
+	int j;
+
+	i = 0;
+	j = 0;
+	d = 0;
+	while (tab[i])	
+	{
+		while (tab[i][d] != '#')
+			d++;
+		while (tab[i][j])
+		{
+			if (tab[i][j] == '#')
+			{
+				if (tab[i][j + 1] == '#' && tab[i][j + 3] == '#' && tab[i][j + 4] == '#' )
+					d--;
+				tab[i][j] = '.';
+				tab[i][j - d] = '#';
+			}
+			j++;
+		}
+		d = 0;
+		j = 0;
+		i++;
+	}
+	tab[i] = 0;
 }
 
 char	**parse_tab(char *tab, int nb_tetra)
 {
-	char	**new_tab = NULL;
+	char	**new_tab;
 	int		i;
 	int		j;
-	int		d;
 
 	i = 0;
 	j = 0;
 	if (!(new_tab = (char**)malloc(sizeof(new_tab) * nb_tetra + 1)))
 		return (0);
-	d = 0;
 	while (i < nb_tetra)
 	{
 		new_tab[i++] = del_eol(tab + j);
 		j += 21;
 	}
 	i = 0;
-	j = 0;
-	while (new_tab[i])
-	{
-		while (new_tab[i][d] != '#')
-			d++;
-		while (new_tab[i][j])
-		{
-			if (new_tab[i][j] == '#')
-			{
-				if (new_tab[i][j + 1] == '#' && new_tab[i][j + 3] == '#' && new_tab[i][j + 4] == '#' )
-					d--;
-				new_tab[i][j] = '.';
-				new_tab[i][j - d] = '#';
-			}
-			j++;
-		}
-		d = 0;
-		j = 0;;
-		i++;
-	}
-	new_tab[i] = 0;
-//	ft_putmultistr(new_tab);
+	first_hashtag(new_tab);
+	ft_putmultistr(new_tab);
 	return (new_tab);
 }
