@@ -6,7 +6,7 @@
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 10:03:21 by auguyon           #+#    #+#             */
-/*   Updated: 2018/12/11 14:26:26 by auguyon          ###   ########.fr       */
+/*   Updated: 2018/12/17 20:46:43 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,25 @@
 
 # define BUFF 547
 
-# include "Libft/libft.h"
 # include<stdio.h>
+# include "Libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
 
-char		**parse_tab(char *tab, int tetra);
-int			check_all(char *str);
-int			print_error(int i);
+typedef struct		s_fi
+{
+	char			**map;
+	char			c;
+	int				size;
+	int				nb_tetra;
+	int				i;
+	int				j;
+}					t_fi;
+
+int					solver(char **tab, t_fi *s);
+char				**parse_tab(char *tab, int tetra);
+int					check_all(char *str);
+int					print_error(int i);
 
 #endif

@@ -6,19 +6,19 @@
 #    By: auguyon <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 14:00:25 by auguyon           #+#    #+#              #
-#    Updated: 2018/12/12 11:39:50 by auguyon          ###   ########.fr        #
+#    Updated: 2018/12/17 17:48:39 by auguyon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	fillit
 
-SRCS	=	check_error.c main.c parse.c
+SRCS	=	check_error.c main.c parse.c solverv4.c
 
 OBJS	=	$(SRCS:.c=.o)
 
 CC		=	gcc
 
-CFLAGS	=	-Wall -Werror -Wextra -I -ILibft/ 	#-O1 2 3
+CFLAGS	= 	-Wall -Werror -Wextra -I -ILibft/ 	#-O1 2 3
 
 LIB		=	Libft/libft.a
 

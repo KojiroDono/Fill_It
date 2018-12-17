@@ -6,7 +6,7 @@
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 10:02:20 by auguyon           #+#    #+#             */
-/*   Updated: 2018/12/12 17:53:30 by auguyon          ###   ########.fr       */
+/*   Updated: 2018/12/17 20:04:37 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,23 @@ char	*del_eol(char *tab)
 	return (tmp);
 }
 
-void	first_hashtag(char **tab)
+void	check_spe_tetra(char *tab, int j, int *d)
+{
+	if (tab[j + 1] == '#' && tab[j + 3] == '#' && tab[j + 4] == '#')
+		(*d)--;
+	else if (tab[j + 3] == '#' && tab[j + 4] == '#' && tab[j + 8] == '#')
+		(*d)--;
+	else if (tab[j + 2] == '#' && tab[j + 3] == '#' && tab[j + 4] == '#')
+		*d = (*d) - 2;
+	else if (tab[j + 4] == '#' && tab[j + 7] == '#' && tab[j + 8] == '#')
+		(*d)--;
+	else if (tab[j + 3] == '#' && tab[j + 4] == '#' && tab[j + 5] == '#')
+		(*d)--;
+	else if (tab[j + 3] == '#' && tab[j + 4] == '#' && tab[j + 7] == '#')
+		(*d)--;
+}
+
+void	moove_tetra_to_left(char **tab, int nb_tetra)
 {
 	int	d;
 	int	i;
@@ -46,17 +62,18 @@ void	first_hashtag(char **tab)
 	{
 		while (tab[i][d] != '#')
 			d++;
+		check_spe_tetra(tab[i], d, &d);
 		while (tab[i][j])
 		{
 			if (tab[i][j] == '#')
 			{
-				if (tab[i][j + 1] == '#' && tab[i][j + 3] == '#' && tab[i][j + 4] == '#' )
-					d--;
 				tab[i][j] = '.';
 				tab[i][j - d] = '#';
 			}
 			j++;
 		}
+		if (nb_tetra == 1)
+			return ;
 		d = 0;
 		j = 0;
 		i++;
@@ -79,8 +96,7 @@ char	**parse_tab(char *tab, int nb_tetra)
 		new_tab[i++] = del_eol(tab + j);
 		j += 21;
 	}
-	i = 0;
-	first_hashtag(new_tab);
-	ft_putmultistr(new_tab);
+	new_tab[nb_tetra] = 0;
+	moove_tetra_to_left(new_tab, nb_tetra);
 	return (new_tab);
 }
