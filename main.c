@@ -6,7 +6,7 @@
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 10:08:07 by auguyon           #+#    #+#             */
-/*   Updated: 2018/12/17 20:46:41 by auguyon          ###   ########.fr       */
+/*   Updated: 2018/12/18 15:21:20 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,16 @@ void 	read_in_tab(int fd, char **str)
 		return ;
 }
 
+int     size_map(int nb_tetra)
+{
+    int size_map;
+    nb_tetra *= 4;
+    size_map = 2;
+    while ((size_map * size_map) < nb_tetra)
+        size_map++;
+    return(size_map);
+}
+
 int		main(int ac, char **av)
 {
 	t_fi	*s;
@@ -67,8 +77,7 @@ int		main(int ac, char **av)
 
 	s = (t_fi*)malloc(sizeof(t_fi));
 	s->map = NULL;
-	s->nb_tetra = 2;
-	s->size = 2;
+	s->size = size_map(s->nb_tetra);
 	s->c = 'A';
 	s->i = 0;
 	s->j = 0;
@@ -77,17 +86,19 @@ int		main(int ac, char **av)
 	fd = open(av[1], O_RDONLY);
 	read_in_tab(fd, &tab); // add function print error
 	close(fd);
-	if ((check_all(tab)) <= 0)
+	if ((s->nb_tetra = check_tetra_is_good(tab)) <= 0)
 		return (print_error(-1));
 	new_tab = parse_tab(tab, s->nb_tetra);
 	ft_strdel(&tab);
 	alloc_map(s);
-//		ft_putmultistr(s->map);
+//		ft_putmultistr(new_tab);
 	printf("test1 av solver\n");
 	while (!solver(new_tab, s))
 	{
-			printf("realloc_map\n");
+		printf("realloc_map\n");
 		s->size++;
+		s->i = 0;
+		s->j = 0;
 		alloc_map(s);
 	}
 	//	ft_putmultistr(s->map);

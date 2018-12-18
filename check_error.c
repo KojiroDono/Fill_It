@@ -12,57 +12,81 @@
 
 #include "fillit.h"
 
-int		print_error(int i)
+int     print_error(int i)
 {
-	if (i == -1)
-		write(2, "Error\n", 6);
-	return (0);
-}
-
-int     check_error(char *str)
-{
-    int i;
-    int n;
-    int d;
-    int t;
-
-    i = 0;
-    n = 0;
-    d = 0;
-    t = 0;
-    while (str[i] == '\n' || str[i] == '#' || str[i] == '.')
-    {
-        if (str[i] != '\n' || str[i] != '#' || str[i] != '.')
-            return (-1);
-        if (str[i] == '#')
-            d++;
-        if (str[i] == '\n')
-            n++;
-        if (d == 4 && (n == 4 || n == 3) && (str[i] == '\n' || str[i] == '\0'))
-        {
-            t++;
-            d = 0;
-            n = 0;
-        }
-        if (d != 4 && (n != 4 || n != 3) && (str[i] != '\n' || str[i] != '\0'))
-            return (-1);
-        i++;
-    }
+    if (i == 0)
+        write(2, "Error\n", 6);
     return (0);
 }
 
-int     check_all(char *str)
+int     check_good_pattern(char *str)
 {
-    int    o;
-    int    len;
-	
-	o = 0;
-	len = ft_strlen(str);
-	while (o < len)
+    int i;
+    int point;
+    int cross;
+    int nret;
+
+    i = -1;
+    point = 0;
+    cross = 0;
+    while (str[++i])
     {
-        if (!check_error(str + o))
-            return (-1);
-        o += 21;
+        if (str[i] == '.')
+            point++;
+        if (str[i] == '#')
+            cross++;
+        if (str[i] == '\n')
+            nret++;
     }
+    if (cross != 4 || point != 12)
+        return (0);
+    if ((nret == 4 && str[20] == '\n' && str[21] == '\0') ||
+            ((nret == 5 && str[20] == '\n' && str[21] == '\n')))
+        return (1);
     return (1);
+}
+
+int     check_link_tetra(char *str)
+{
+    int i;
+    int link;
+
+    i = -1;
+    link = 0;
+    while (str[++i])
+    {
+        if (str[i] == '#')
+        {
+            if (str[i + 1] == '#' && str[i + 1])
+                link++;
+            if (str[i + 5] == '#' && str[i + 5])
+                link++;
+            if (str[i - 1] == '#' && str[i - 1])
+                link++;
+            if (str[i - 5] == '#' && str[i - 5])
+                link++;
+        }
+    }
+    if (link == 6 || link == 8)
+        return (1);
+    return (0);
+}
+
+int     check_tetra_is_good(char *tab)
+{
+    size_t  i;
+    size_t  l;
+    int t;
+    
+    t = 0;
+    i = 0;
+    l = ft_strlen(tab);
+    while (i < l)
+    {
+        check_good_pattern(tab + i);
+        check_link_tetra(tab + i);
+            t++;
+        i = i + 21;
+    }
+    return (t);
 }

@@ -6,7 +6,7 @@
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 10:03:21 by auguyon           #+#    #+#             */
-/*   Updated: 2018/12/17 20:46:43 by auguyon          ###   ########.fr       */
+/*   Updated: 2018/12/18 14:19:14 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct		s_fi
 
 int					solver(char **tab, t_fi *s);
 char				**parse_tab(char *tab, int tetra);
-int					check_all(char *str);
+int					check_tetra_is_good(char *tab);
 int					print_error(int i);
 
 #endif
