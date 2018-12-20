@@ -6,7 +6,7 @@
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 13:17:48 by auguyon           #+#    #+#             */
-/*   Updated: 2018/12/18 15:22:16 by auguyon          ###   ########.fr       */
+/*   Updated: 2018/12/19 13:33:54 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	del_last_tetra(t_fi *s) // on delete le dernier tetra placer pour le replac
 		j = 0;
 		i++;
 	}
-	s->nb_tetra++;
-	s->c--;
 	s->j++;
+	if (s->c != 'A')
+		s->c--;
 }
 
 void	fill_map(char *tab, t_fi *s, int i_tmp, int j_tmp) // apres avoir trouver une emplacement on le remplie
@@ -122,13 +122,16 @@ int 	check_place_tetra(char *tab, t_fi *s) // on regarde si il y a de place pour
 		}
 		if (tab[j] == '#')
 		{
-			if (ft_isupper(s->map[s->i][s->j]) || !s->map[s->i][s->j])
+			if (!s->map[s->i][s->j] || !s->map[s->i])
 				return (0);
+			if (ft_isupper(!s->map[s->i][s->j]))
+				return (0);
+			// condition d'arret si la pos est mauvaise
 			s->j++;
 			j++;
 		}
 	}
-	ft_putendl("place trouver !");
+	ft_putendl("place trouve !");
 	return (1);
 }
 
@@ -154,24 +157,17 @@ int		check_n_fill(char *tab, t_fi *s) // fct mere
 	int i_tmp;
 	int j_tmp;
 
-	ft_putendl("av find empty");
-	printf("pos map : i:%d j:%d\n", s->i, s->j);		
+	ft_putendl("Debut de check_n_fill");
+	s->i = 0;
+	s->j = 0;
 	if (!find_empty_cell(s)) // on trouve la 1ere case vide
 			return (0);
-	ft_putendl("ap find empty");
 	i_tmp = s->i;
 	j_tmp = s->j;
-	while (!check_place_tetra(tab, s)) // on cherche lendroit ou on peut placer le tetra, si on peut pas on retourne 0
+	while (!check_place_tetra(tab, s)) // on cherche lendroit ou on peut placer le tetra, si on trouve pas on retourne 0
 	{
-		if (s->i == (s->size - 1) && s->j == (s->size - 1))
+		if (!find_empty_cell(s))
 			return (0);
-		if (s->map[s->i][s->j + 1] == '\0')
-		{
-			s->i++;
-			s->j = 0;
-		}
-		else
-	 		s->j++;
 		i_tmp = s->i;
 		j_tmp = s->j;
 	}
@@ -181,24 +177,15 @@ int		check_n_fill(char *tab, t_fi *s) // fct mere
 
 int		solver(char **tab, t_fi *s)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
 	if (s->nb_tetra == 0)
 		return (1);
-	while (s->map[s->i][s->j])
-	{
-		ft_putendl("test av check");
-		ft_putmultistr(s->map);
-		if (check_n_fill(tab[s->c - 'A'], s))
+			ft_putendl("test av check");
+			ft_putmultistr(s->map);
+		if (check_n_fill(tab[(s->c - 'A')], s))
 		{
 			if (solver(tab, s) == 1)
 				return (1);
-			if (s->c != 'A')
-				del_last_tetra(s);	
+			del_last_tetra(s);
 		}
-	}
 	return (0);
 }

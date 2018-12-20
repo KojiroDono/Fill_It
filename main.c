@@ -6,7 +6,7 @@
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 10:08:07 by auguyon           #+#    #+#             */
-/*   Updated: 2018/12/18 15:21:20 by auguyon          ###   ########.fr       */
+/*   Updated: 2018/12/20 15:27:54 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	alloc_map(t_fi *s)
 	}
 	j = 0;
 	s->map = (char**)malloc(sizeof(char*) * (s->size + 1));
-	while (j < s->size)
+	while (j <= s->size)
 		s->map[j++] = ft_strnew(s->size);
 	s->map[s->size] = 0;
 	fill_w_dot(s);
@@ -91,8 +91,9 @@ int		main(int ac, char **av)
 	new_tab = parse_tab(tab, s->nb_tetra);
 	ft_strdel(&tab);
 	alloc_map(s);
+//		printf("Size =%d\n",s->size);
 //		ft_putmultistr(new_tab);
-	printf("test1 av solver\n");
+//		return (0);
 	while (!solver(new_tab, s))
 	{
 		printf("realloc_map\n");
@@ -101,6 +102,6 @@ int		main(int ac, char **av)
 		s->j = 0;
 		alloc_map(s);
 	}
-	//	ft_putmultistr(s->map);
+//		ft_putmultistr(s->map);
 	return (0);
 }

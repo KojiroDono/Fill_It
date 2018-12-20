@@ -6,7 +6,7 @@
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 13:45:41 by auguyon           #+#    #+#             */
-/*   Updated: 2018/12/17 17:38:12 by auguyon          ###   ########.fr       */
+/*   Updated: 2018/12/18 15:39:06 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int     check_good_pattern(char *str)
     i = -1;
     point = 0;
     cross = 0;
+	nret = 0;
     while (str[++i])
     {
         if (str[i] == '.')
