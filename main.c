@@ -6,22 +6,28 @@
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 10:08:07 by auguyon           #+#    #+#             */
-/*   Updated: 2018/12/28 14:59:14 by auguyon          ###   ########.fr       */
+/*   Updated: 2019/01/03 13:59:26 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	init_struct(t_fi *s) // Initialise la struct
+int		print_error(void)
+{
+	write(2, "Error\n", 6);
+	return (0);
+}
+
+void	init_struct(t_fi *s)
 {
 	s->map = NULL;
-	size_map(s); // on trouve la taille mini de la map et on alloc pour la 1ere fois
+	size_map(s);
 	s->c = 'A';
 	s->i = 0;
 	s->j = 0;
 }
 
-int		open_n_read(char *av, char **str) // ouvre le fichier, et return si il est trop grand
+int		open_n_read(char *av, char **str)
 {
 	char	buf[BUFF + 1];
 	int		ret;
@@ -34,33 +40,36 @@ int		open_n_read(char *av, char **str) // ouvre le fichier, et return si il est 
 	if (!(*str = ft_strdup(buf)))
 		return (0);
 	close(fd);
-	if (ft_strlen(str) > 547)
-		return (print_error());
+	if (ft_strlen(*str) > 547)
+		return (0);
 	return (1);
 }
 
-int		main(int ac, char **av)
+int		main(int ac, char **av, char **envp)
 {
 	t_fi	*s;
 	char	**new_tab;
 	char	*str;
 
-	s = (t_fi*)malloc(sizeof(t_fi)); // malloc la struct
+	s = (t_fi*)malloc(sizeof(t_fi));
 	if (ac != 2)
 		return (print_error());
 	if (!open_n_read(av[1], &str))
 		return (print_error());
-	if ((s->nb_tetra = check_tetra_is_good(str)) <= 0) // on check si les tetra sont ok
+	if ((s->nb_tetra = check_tetra_is_good(str)) <= 0)
 		return (print_error());
 	init_struct(s);
-	new_tab = sort_tab(str, s->nb_tetra); // on range le tab dans un char** et on place toute les pieces a gauche
-	while (!solver(new_tab, s)) // on resout le tetri
+	new_tab = sort_tab(str, s->nb_tetra);
+	while (!solver(new_tab, s))
 	{
 		s->size++;
 		s->i = 0;
 		s->j = 0;
-		alloc_map(s); // si besoin on realloc pour aggrandir la map
+		alloc_map(s);
 	}
-	ft_putmultistr(s->map); // on affiche la map
+	if (fillit_color_true(envp))
+		print_in_color(s);
+	else
+		ft_putmultistr(s->map);
 	return (0);
 }

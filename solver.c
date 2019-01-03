@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-int		erase_last_tetra(t_fi *s) // on efface le tetra d'avant pour pouvoir le replacer
+int		erase_last_tetra(t_fi *s)
 {
 	int i;
 	int j;
@@ -20,9 +20,9 @@ int		erase_last_tetra(t_fi *s) // on efface le tetra d'avant pour pouvoir le rep
 
 	i = 0;
 	one = 0;
-	s->c--; // on decremente la lettre B -> A
-	s->nb_tetra++; // on incremente le nb de tetra
-	while (s->map[i] && !(j = 0)) // on va chercher la lettre et la remplacer par un '.'
+	s->c--;
+	s->nb_tetra++;
+	while (s->map[i] && !(j = 0))
 	{
 		while (s->map[i][j])
 		{
@@ -41,14 +41,14 @@ int		erase_last_tetra(t_fi *s) // on efface le tetra d'avant pour pouvoir le rep
 	return (1);
 }
 
-int		find_hashtag_n_rpos(int j, char *tab, t_fi *s) // on cherche notre hasttag dans notre tab et on return la pos
+int		find_hashtag_n_rpos(int j, char *tab, t_fi *s)
 {
 	while (tab[j] != '#' && tab[j])
 	{
 		if ((j + 1) % 4 == 0)
 		{
 			s->i++;
-			if (tab[j + 1] == '#' && tab[j - 1] == '#') // des conditions pour certain cas 
+			if (tab[j + 1] == '#' && tab[j - 1] == '#')
 				s->j -= 2;
 			else if (tab[j + 1] == '#' && tab[j - 2] == '#')
 				s->j--;
@@ -61,7 +61,7 @@ int		find_hashtag_n_rpos(int j, char *tab, t_fi *s) // on cherche notre hasttag 
 	return (j);
 }
 
-int		fill_map_w_tetra(char *tab, t_fi *s) // on remplie la map avec le tetra, meme fct que en dessous
+int		fill_map_w_tetra(char *tab, t_fi *s)
 {
 	int j;
 
@@ -78,41 +78,41 @@ int		fill_map_w_tetra(char *tab, t_fi *s) // on remplie la map avec le tetra, me
 		}
 		j++;
 	}
-	s->nb_tetra--; // on decremente notre nb de tetra 
-	s->c++; // on incremente notre lettre A -> B
+	s->nb_tetra--;
+	s->c++;
 	s->i = 0;
 	s->j = 0;
 	return (1);
 }
 
-int		find_cell_for_tetra(char *tab, t_fi *s) // on cherche une place pour le tetra
+int		find_cell_for_tetra(char *tab, t_fi *s)
 {
 	int j;
 	int i_tmp;
 	int j_tmp;
 
 	j = 0;
-	i_tmp = s->i; // on garde les coodonees du debut
+	i_tmp = s->i;
 	j_tmp = s->j;
 	while (tab[j])
 	{
-		j = find_hashtag_n_rpos(j, tab, s); // on cherche la pos du hashtag
+		j = find_hashtag_n_rpos(j, tab, s);
 		if (tab[j] == '#')
 		{
 			if (!s->map[s->i] || !s->map[s->i][s->j] ||
-					s->map[s->i][s->j] != '.') // si la pos est libre et existe on continue
+					s->map[s->i][s->j] != '.')
 				return (0);
 			if (tab[j + 1] == '#')
 				s->j++;
 		}
 		j++;
 	}
-	s->i = i_tmp; // on reprend les coodonee du debut
+	s->i = i_tmp;
 	s->j = j_tmp;
 	return (1);
 }
 
-int		solver(char **tab, t_fi *s) // la fct de backtracking
+int		solver(char **tab, t_fi *s)
 {
 	int i;
 	int j;

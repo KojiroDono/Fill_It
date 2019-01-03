@@ -6,17 +6,11 @@
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 13:45:41 by auguyon           #+#    #+#             */
-/*   Updated: 2018/12/28 15:06:38 by auguyon          ###   ########.fr       */
+/*   Updated: 2019/01/02 14:31:06 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-int		print_error(void)
-{
-	write(2, "Error\n", 6);
-	return (0);
-}
 
 int		check_good_pattern(char *str)
 {

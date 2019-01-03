@@ -6,13 +6,14 @@
 #    By: auguyon <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 14:00:25 by auguyon           #+#    #+#              #
-#    Updated: 2018/12/28 15:11:57 by auguyon          ###   ########.fr        #
+#    Updated: 2019/01/03 13:58:10 by auguyon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	fillit
 
-SRCS	=	alloc_map.c main.c sort_tab.c parse.c special_tetra_check.c solver.c
+SRCS	=	alloc_map.c main.c sort_tab.c parse.c special_tetra_check.c\
+			print_in_color.c solver.c
 
 OBJS	=	$(SRCS:.c=.o)
 
