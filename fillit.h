@@ -6,7 +6,7 @@
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 10:03:21 by auguyon           #+#    #+#             */
-/*   Updated: 2019/01/03 13:51:04 by auguyon          ###   ########.fr       */
+/*   Updated: 2019/01/11 20:14:34 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <unistd.h>
 # include <fcntl.h>
 
+int					g_fill_it_color;
+
 typedef struct		s_fi
 {
 	char			**map;
@@ -30,14 +32,15 @@ typedef struct		s_fi
 	int				j;
 }					t_fi;
 
+int					print_error(int error);
+int					free_struct_n_str(char *str, t_fi *s);
+void				free_struct(t_fi *s);
+
+int					open_n_read(char *av, char **str);
+int					parse(char *tab, t_fi *s);
+int					alloc_map(t_fi *s);
+char				**sort_tab(char *tab, t_fi *s);
 int					solver(char **tab, t_fi *s);
-char				**sort_tab(char *tab, int tetra);
-int					check_tetra_is_good(char *tab);
-int					spe_tetra(char *tab, int j);
-int					find_cell_for_spe_tetra(char *tab, int j, t_fi *s);
-int					find_cell_for_spe_tetra2(char *tab, int j, t_fi *s);
-int					size_map(t_fi *s);
-void				alloc_map(t_fi *s);
 int					fillit_color_true(char **envp);
 void				print_in_color(t_fi *s);
 

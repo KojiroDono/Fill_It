@@ -1,16 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isupper.c                                       :+:      :+:    :+:   */
+/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/16 15:10:50 by auguyon           #+#    #+#             */
-/*   Updated: 2018/11/16 15:36:44 by auguyon          ###   ########.fr       */
+/*   Created: 2019/01/07 15:06:14 by auguyon           #+#    #+#             */
+/*   Updated: 2019/01/07 15:30:59 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isupper(int c)
+#include "libft.h"
+
+char	*ft_strnjoin(char const *s1, char const *s2, size_t size)
 {
-	return (c >= 65 && c <= 90);
+	char	*dst;
+
+	if (!s1 || !s2)
+		return (NULL);
+	if (!(dst = ft_memalloc(ft_strlen(s1) + size + 1)))
+		return (NULL);
+	ft_strncat((ft_strcpy(dst, s1)), s2, size);
+	return (dst);
 }

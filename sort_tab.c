@@ -6,34 +6,38 @@
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 10:02:20 by auguyon           #+#    #+#             */
-/*   Updated: 2018/12/28 15:05:41 by auguyon          ###   ########.fr       */
+/*   Updated: 2019/01/05 17:38:54 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
-char	*del_eol(char *tab)
+static char	*del_new_line(char *tab)
 {
-	char	*new_tab;
-	char	*tmp;
+	char	*str;
 	int		i;
+	int		j;
 
 	i = 0;
-	if (!(new_tab = (char*)malloc(sizeof(*new_tab) * 17)))
-		return (0);
-	tmp = new_tab;
-	while (i < 4)
+	j = 0;
+	if (!(str = (char*)malloc(sizeof(*str) * 17)))
+		if (!print_error(-42))
+			return (NULL);
+	while (i < 21)
 	{
-		new_tab = ft_strncpy(new_tab, tab, 4);
-		tab += 5;
-		new_tab += 4;
+		if (tab[i] == '\n')
+			i++;
+		str[j] = tab[i];
 		i++;
+		j++;
+		if (j == 17)
+			str[j] = '\0';
 	}
-	new_tab[17] = '\0';
-	return (tmp);
+	return (str);
 }
 
-void	check_spe_tetra(char *tab, int j, int *d)
+static void	check_spe_tetra(char *tab, int j, int *d)
 {
 	if (tab[j + 1] == '#' && tab[j + 3] == '#' && tab[j + 4] == '#')
 		(*d)--;
@@ -49,7 +53,7 @@ void	check_spe_tetra(char *tab, int j, int *d)
 		(*d)--;
 }
 
-void	moove_tetra_to_left(char **tab, int nb_tetra)
+static void	moove_tetra_to_left(char **tab, int nb_tetra)
 {
 	int	d;
 	int	i;
@@ -77,7 +81,7 @@ void	moove_tetra_to_left(char **tab, int nb_tetra)
 	}
 }
 
-char	**sort_tab(char *tab, int nb_tetra)
+char		**sort_tab(char *tab, t_fi *s)
 {
 	char	**new_tab;
 	int		i;
@@ -85,15 +89,19 @@ char	**sort_tab(char *tab, int nb_tetra)
 
 	i = 0;
 	j = 0;
-	if (!(new_tab = (char**)malloc(sizeof(new_tab) * nb_tetra + 1)))
-		return (0);
-	while (i < nb_tetra)
+	if (!(new_tab = (char**)malloc(sizeof(new_tab) * s->nb_tetra + 1)))
 	{
-		new_tab[i++] = del_eol(tab + j);
+		free_struct(s);
+		print_error(-42);
+		return (NULL);
+	}
+	while (i < s->nb_tetra)
+	{
+		new_tab[i++] = del_new_line(tab + j);
 		j += 21;
 	}
-	new_tab[nb_tetra] = 0;
-	moove_tetra_to_left(new_tab, nb_tetra);
-	ft_strdel(&tab);
+	new_tab[s->nb_tetra] = 0;
+	moove_tetra_to_left(new_tab, s->nb_tetra);
+	free(tab);
 	return (new_tab);
 }

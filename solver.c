@@ -6,13 +6,13 @@
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 12:17:42 by auguyon           #+#    #+#             */
-/*   Updated: 2018/12/28 15:02:46 by auguyon          ###   ########.fr       */
+/*   Updated: 2019/01/05 16:38:43 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		erase_last_tetra(t_fi *s)
+static int	erase_last_tetra(t_fi *s)
 {
 	int i;
 	int j;
@@ -41,7 +41,7 @@ int		erase_last_tetra(t_fi *s)
 	return (1);
 }
 
-int		find_hashtag_n_rpos(int j, char *tab, t_fi *s)
+static int	find_hashtag_n_rpos(int j, char *tab, t_fi *s)
 {
 	while (tab[j] != '#' && tab[j])
 	{
@@ -61,7 +61,7 @@ int		find_hashtag_n_rpos(int j, char *tab, t_fi *s)
 	return (j);
 }
 
-int		fill_map_w_tetra(char *tab, t_fi *s)
+static int	fill_map_w_tetra(char *tab, t_fi *s)
 {
 	int j;
 
@@ -85,7 +85,7 @@ int		fill_map_w_tetra(char *tab, t_fi *s)
 	return (1);
 }
 
-int		find_cell_for_tetra(char *tab, t_fi *s)
+static int	find_cell_for_tetra(char *tab, t_fi *s)
 {
 	int j;
 	int i_tmp;
@@ -112,7 +112,7 @@ int		find_cell_for_tetra(char *tab, t_fi *s)
 	return (1);
 }
 
-int		solver(char **tab, t_fi *s)
+int			solver(char **tab, t_fi *s)
 {
 	int i;
 	int j;

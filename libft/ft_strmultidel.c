@@ -1,16 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isupper.c                                       :+:      :+:    :+:   */
+/*   ft_strmultidel.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/16 15:10:50 by auguyon           #+#    #+#             */
-/*   Updated: 2018/11/16 15:36:44 by auguyon          ###   ########.fr       */
+/*   Created: 2019/01/05 16:34:14 by auguyon           #+#    #+#             */
+/*   Updated: 2019/01/05 17:42:10 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isupper(int c)
+#include "libft.h"
+
+void	ft_strmultidel(char **str)
 {
-	return (c >= 65 && c <= 90);
+	while (*str)
+		ft_strdel(str++);
+	ft_strdel(str);
 }

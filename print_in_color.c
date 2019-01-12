@@ -6,13 +6,13 @@
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 12:39:35 by auguyon           #+#    #+#             */
-/*   Updated: 2019/01/03 13:54:21 by auguyon          ###   ########.fr       */
+/*   Updated: 2019/01/04 17:37:44 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		fillit_color_true(char **envp)
+int			fillit_color_true(char **envp)
 {
 	int i;
 
@@ -20,13 +20,17 @@ int		fillit_color_true(char **envp)
 	while (envp[i])
 	{
 		if (ft_strcmp(envp[i], "Fill_It=True") == 0)
+		{
+			g_fill_it_color = 1;
 			return (1);
+		}
 		i++;
 	}
+	g_fill_it_color = 0;
 	return (0);
 }
 
-int		what_color(t_fi *s, int i, int j)
+static int	what_color(t_fi *s, int i, int j)
 {
 	int color;
 
@@ -44,7 +48,7 @@ int		what_color(t_fi *s, int i, int j)
 	return (color);
 }
 
-void	print_code_color(t_fi *s, int i, int j)
+static void	print_code_color(t_fi *s, int i, int j)
 {
 	int color;
 
@@ -64,23 +68,20 @@ void	print_code_color(t_fi *s, int i, int j)
 	ft_putstr("\033[0m");
 }
 
-void	print_in_color(t_fi *s)
+void		print_in_color(t_fi *s)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (s->map[i] && !(j = 0))
+	s->i = 0;
+	while (s->map[s->i] && !(s->j = 0))
 	{
-		while (s->map[i][j])
+		while (s->map[s->i][s->j])
 		{
-			if (ft_isupper(s->map[i][j]))
-				print_code_color(s, i, j);
+			if (ft_isupper(s->map[s->i][s->j]))
+				print_code_color(s, s->i, s->j);
 			else
-				ft_putchar(s->map[i][j]);
-			j++;
+				ft_putchar(s->map[s->i][s->j]);
+			s->j++;
 		}
 		ft_putchar('\n');
-		i++;
+		s->i++;
 	}
 }

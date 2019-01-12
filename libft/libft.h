@@ -6,7 +6,7 @@
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/10 14:01:04 by auguyon           #+#    #+#             */
-/*   Updated: 2018/12/11 12:18:30 by auguyon          ###   ########.fr       */
+/*   Updated: 2019/01/07 15:27:14 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,7 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list				*ft_lstnew(void const *content, size_t content_size);
 size_t				ft_strspn(const char *s, const char *c);
 size_t				ft_strcspn(const char *s, const char *c);
+void				ft_strmultidel(char **str);
+char				*ft_strnjoin(char const *s1, char const *s2, size_t size);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 14:04:50 by auguyon           #+#    #+#             */
-/*   Updated: 2018/12/11 12:09:26 by auguyon          ###   ########.fr       */
+/*   Updated: 2019/01/05 17:43:28 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_putmultistr(char **str)
 	int i;
 
 	i = 0;
+	if (!str)
+		return ((void)0);
 	while (str[i] != 0)
 	{
 		ft_putstr(str[i++]);
