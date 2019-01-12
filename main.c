@@ -6,11 +6,15 @@
 /*   By: auguyon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 10:08:07 by auguyon           #+#    #+#             */
-/*   Updated: 2019/01/11 20:14:10 by auguyon          ###   ########.fr       */
+/*   Updated: 2019/01/12 17:08:49 by auguyon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+/*
+** For active color, "export Fill_It=True"
+*/
 
 static void	print_n_free(t_fi *s, char **new_tab)
 {
